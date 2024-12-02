@@ -1,5 +1,6 @@
 import React, {forwardRef} from "react";
 import {twMerge} from "tailwind-merge"
+import {Label} from "@/components/ui/label";
 
 interface TypographyProps extends React.HTMLAttributes<HTMLHeadingElement | HTMLParagraphElement | HTMLQuoteElement | HTMLElement> {
   className?: string;
@@ -28,7 +29,7 @@ const Typography = {
                                                        }, ref) => (
       <h2
           ref={ref}
-          className={twMerge(`scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 font-sans text-sh-text ${className}`)}
+          className={twMerge(`scroll-m-20  pb-2 text-3xl font-semibold tracking-tight first:mt-0 font-sans text-sh-text ${className}`)}
           {...props}
       >
         {children}
@@ -55,7 +56,7 @@ const Typography = {
                                                        }, ref) => (
       <h4
           ref={ref}
-          className={twMerge(`scroll-m-20 text-xl font-semibold tracking-tight font-sans text-sh-text ${className}`)}
+          className={twMerge(`scroll-m-20 text-xl font-semibold  font-sans text-sh-text ${className}`)}
           {...props}
       >
         {children}
@@ -100,6 +101,19 @@ const Typography = {
         {children}
       </code>
   )),
+  Label: forwardRef<HTMLLabelElement, TypographyProps>(({
+                                                          children,
+                                                          className = "",
+                                                          ...props
+                                                        }, ref) => (
+      <Label
+          ref={ref}
+          className={twMerge(`relative rounded  mb-1 text-sm font-medium text-sh-text ${className}`)}
+          {...props}
+      >
+        {children}
+      </Label>
+  )),
 };
 
 
@@ -110,4 +124,5 @@ Typography.H4.displayName = "Typography.H4";
 Typography.Paragraph.displayName = "Typography.Paragraph";
 Typography.Blockquote.displayName = "Typography.Blockquote";
 Typography.InlineCode.displayName = "Typography.InlineCode";
+Typography.Label.displayName = "Typography.Label";
 export default Typography;

@@ -8,9 +8,12 @@ import {ISignUpLoginForm} from "@/types/user/user.interface";
 import {useToast} from "@/hooks/use-toast";
 import {useUserStore} from "@/store/user.store";
 import {Button} from "@/components/ui/button";
-import NextImg from 'next/image'
+import NextImg from 'next/image';
 import useCustomState from "@/hooks/use-state";
 import Typography from "@/components/common/Typography";
+import background from "@/public/assets/images/login-background.png";
+import logo from "@/public/assets/images/Logo.svg"
+import Input from "./Input";
 
 interface Props {
   type: "login" | "signup";
@@ -38,9 +41,8 @@ const AuthContainer = ({type}: Props) => {
     email: "",
     full_name: "",
     password: "",
-    password_confirmation: ""
-  })
-
+    password_confirmation: "",
+  });
 
   async function onSubmit() {
     const userService = new UserService();
@@ -52,32 +54,46 @@ const AuthContainer = ({type}: Props) => {
     if (type === "login") {
       response = await userService.login(fields);
     }
-    console.log({response})
+    console.log({response});
     if (response?.success) {
-      toast({variant: "default", title: "Đăng ký thành công"})
+      toast({variant: "default", title: "Đăng ký thành công"});
     } else {
       toast({
         variant: "destructive",
         title: "Có lỗi xảy ra",
-      })
+      });
     }
-
-    // if (response?.status === 200) {
-    //   userStore.setAccessToken(response.data.accessToken);
-    //   userStore.setUser(response.data.data);
-    //   window.location.href = "/";
-    // } else {
-    //   toast.toast({
-    //     title: response?.errors,
-    //     variant: "destructive",
-    //   });
-    // }
   }
 
   return (
-      <div>
+      <div
+          className="relative w-full min-h-screen flex justify-center items-center p-5 md:bg-sh-background bg-sh-secondary-300">
+        {/* Background image using NextImg */}
 
+        <NextImg
+            className="absolute inset-0 object-cover w-full h-full md:block hidden"
+            src={background}
+            quality={100}
+            alt="background"
+            layout="fill"
+        />
+        <NextImg
+            className="absolute md:left-[40px] md:top-6 left-4 top-4 object-cover md:w-[180px] w-[100px] h-auto"
+            src={logo}
+            quality={100}
+            alt="logo"
+            width={180}
+            height={45}
+        />
+
+        {/* Content */}
+        <div
+            className="absolute left-[50%] translate-y-[-50%] top-[50%] translate-x-[-50%] z-10 bg-sh-secondary-300 rounded-lg md:p-6 p-4 flex flex-col items-center justify-center ">
+          <Typography.H2>{data[type].title}</Typography.H2>
+          <Input placeholder={"Nhập email"} label={"Email"}/>
+        </div>
       </div>
+
   );
 };
 

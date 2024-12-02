@@ -1,5 +1,7 @@
 import React, {forwardRef} from "react";
 import {Label} from "@/components/ui/label";
+import Typography from "@/components/common/Typography";
+import {twMerge} from "tailwind-merge";
 
 interface Props {
   placeholder: string;
@@ -7,6 +9,7 @@ interface Props {
   name?: string;
   label?: string;
   className?: string;
+  labelClassName?: string;
   value?: string;
   errorMessage?: string; // Add error message prop
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -15,17 +18,26 @@ interface Props {
 
 // Use forwardRef for the input element
 const Input = forwardRef<HTMLInputElement, Props>(
-    ({placeholder, type = "text", name, label, className, value, errorMessage, onChange}, ref) => {
+    ({
+       placeholder,
+       type = "text",
+       name,
+       label,
+       className,
+       value,
+       errorMessage,
+       onChange,
+       labelClassName
+     }, ref) => {
       return (
           <div>
             {/* Label */}
             {label && (
-                <Label
-                    htmlFor={name}
-                    className="block text-sm font-semibold text-gray-700 mb-1"
+                <Typography.Label
+                    className={twMerge(`block  ${labelClassName}`)}
                 >
                   {label}
-                </Label>
+                </Typography.Label>
             )}
 
             <input
