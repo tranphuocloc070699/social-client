@@ -19,7 +19,6 @@ export interface IconProps {
   name: keyof typeof icons | string;
   showIcon?: boolean;
   className?: string;
-  position?: "left" | "right";
 }
 
 export interface InputProps {
@@ -63,6 +62,7 @@ export interface IDefaultClassName {
   label: string,
   input: string,
   icon: string,
+  wrapper: string;
 }
 
 const InputForm = forwardRef<HTMLInputElement, Props>(

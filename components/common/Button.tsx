@@ -1,6 +1,6 @@
 import React, {useMemo} from 'react';
 import {twMerge} from "tailwind-merge";
-import {icons} from "@/components/common/Icon";
+import Icon, {icons} from "@/components/common/Icon";
 import SpinnerLoading from "@/components/common/SpinnerLoading";
 
 interface IconProps {
@@ -17,7 +17,8 @@ interface Props {
   type?: "button" | "submit" | "reset";
   variant?: "primary" | "secondary" | false;
   showChildren?: boolean;
-  icon?: IconProps
+  icon?: IconProps;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, Props>(({
@@ -27,7 +28,10 @@ const Button = React.forwardRef<HTMLButtonElement, Props>(({
                                                              children,
                                                              variant,
                                                              type = "button",
-                                                             asLink
+                                                             asLink,
+                                                             showChildren = true,
+                                                             icon,
+                                                             onClick,
                                                            }, ref) => {
 
   const classNameProcessor = useMemo(() => {
@@ -45,16 +49,23 @@ const Button = React.forwardRef<HTMLButtonElement, Props>(({
     return className;
   }, [variant]);
 
+  function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
+    if (loading) return;
+
+    if (onClick) onClick(e);
+  }
 
   return (
-      <button component-name="Button" type={type} ref={ref}
-              className={twMerge(` ${classNameProcessor}`)}>
+      <button component-name="Button" type={type} disabled={disabled} ref={ref}
+              className={twMerge(` ${classNameProcessor}`)} onClick={handleClick}>
         <div
-            className={twMerge(`relative transition-all ${loading ? "w-10 h-10 opacity-100" : "w-0 h-0 opacity-0"} `)}>
-          <SpinnerLoading className={twMerge(`absolute inset-0 w-full h-full`)}/>
-
+            className={twMerge(`relative transition-all ${(loading || icon?.showIcon) ? "w-7 h-7 opacity-100" : "w-0 h-0 opacity-0"} `)}>
+          <SpinnerLoading
+              className={twMerge(`absolute inset-0 w-full h-full transition-all ${loading ? "opacity-100" : "opacity-0"}`)}/>
+          <Icon name={icon?.name}
+                className={twMerge(`absolute inset-0 w-full h-full transition-all ${(icon?.showIcon && !loading) ? "opacity-100" : "opacity-0"}`)}/>
         </div>
-        {children}
+        {showChildren && children}
       </button>
   );
 })

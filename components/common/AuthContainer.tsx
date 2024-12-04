@@ -30,7 +30,7 @@ const AuthContainer = ({type}: Props) => {
       title: "Đăng nhập",
       switchTitle: "Chưa có tài khoản?",
       switchBtnLabel: "Đăng ký",
-      switchLink: "/dang-ky",
+      switchLink: "/dang-ky"
     },
     signup: {
       title: "Đăng ký",
@@ -136,7 +136,7 @@ const AuthContainer = ({type}: Props) => {
             height={45}
         />
         <div
-            className="absolute left-[50%] translate-y-[-50%] top-[50%] translate-x-[-50%] z-10 bg-sh-secondary-300 rounded-lg md:p-6 p-4 flex flex-col gap-1 items-center justify-center md:w-[500px] w-[80%]">
+            className="absolute left-[50%] translate-y-[-50%] top-[50%] translate-x-[-50%] z-10 bg-sh-secondary-300 rounded-lg md:p-6 p-4 flex flex-col gap-2 items-center justify-center md:w-[500px] w-[80%]">
           <Typography.H2>{data[type].title}</Typography.H2>
           {type === "signup" &&
 							<InputForm icon={{name: "user", showIcon: true}}
@@ -153,6 +153,7 @@ const AuthContainer = ({type}: Props) => {
                            control,
                            showWarningIcon: true,
                          }}
+
 							/>
           }
           <InputForm icon={{name: "email", showIcon: true}}
@@ -168,8 +169,9 @@ const AuthContainer = ({type}: Props) => {
                      validation={{
                        control,
                        showWarningIcon: true,
-
                      }}
+
+
           />
           <InputForm icon={{name: "key", showIcon: true}}
                      input={{
@@ -203,8 +205,15 @@ const AuthContainer = ({type}: Props) => {
                          }}
 							/>
           }
-          <Button loading={true} type={"submit"}
+          <Button loading={isSubmitting}
+                  type={"submit"}
                   variant={"primary"}>{data[type].title}</Button>
+          <div className="flex items-center justify-center p-5 relative w-full">
+            <Typography.Label
+                className={"bg-sh-secondary-300 text-sh-secondary-100"}>Hoặc</Typography.Label>
+            <div
+                className={"bg-sh-secondary-100 absolute h-[1px] w-full top-[50%] left-0 right-0 translate-x-[-50%]"}></div>
+          </div>
         </div>
       </form>
 

@@ -10,7 +10,7 @@ const SpinnerLoading = ({className}: Props) => {
   return (
 
       <svg
-          className={twMerge(`animate-spin w-10 h-10 ${className}`)}
+          className={twMerge(`animate-spin w-full h-full ${className}`)}
           xmlns="http://www.w3.org/2000/svg"
           width="1em"
           height="1em"
