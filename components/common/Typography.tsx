@@ -108,7 +108,7 @@ const Typography = {
                                                         }, ref) => (
       <Label
           ref={ref}
-          className={twMerge(`relative rounded  mb-1 text-sm font-medium text-sh-text font-serif ${className}`)}
+          className={twMerge(`relative rounded leading-4 mb-1 text-base font-medium text-sh-text font-serif ${className}`)}
           {...props}
       >
         {children}

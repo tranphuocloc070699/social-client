@@ -8,7 +8,7 @@ import {
   Unlink,
   Heart,
   CircleX,
-  TextSearch, Mail, LockKeyhole, Eye, EyeOff, TriangleAlert,
+  TextSearch, Mail, LockKeyhole, Eye, EyeOff, TriangleAlert, User, KeyRound,
 } from "lucide-react";
 
 
@@ -26,7 +26,9 @@ export const icons = {
   lock: <LockKeyhole/>,
   eye: <Eye/>,
   eyeOff: <EyeOff/>,
-  warning: <TriangleAlert/>
+  warning: <TriangleAlert/>,
+  user: <User/>,
+  key: <KeyRound/>
 } as const;
 
 interface Props {

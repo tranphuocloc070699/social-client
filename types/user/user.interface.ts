@@ -1,11 +1,12 @@
 import {UserDto} from "./user.model";
 
-export interface ISignUpLoginForm {
+export interface IAuthForm {
   full_name?: string;
-  email: string;
-  password: string;
-  password_confirmation: string;
+  email?: string;
+  password?: string;
+  password_confirmation?: string;
 }
+
 
 export interface ISignUpLoginResponse {
   accessToken: string;
