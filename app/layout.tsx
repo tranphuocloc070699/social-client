@@ -32,7 +32,7 @@ export default function RootLayout({
       <html lang="en">
       <body
           suppressHydrationWarning={true}
-          className={`${oswald.variable} ${sourceSerif4.variable}`}
+          className={`bg-sh-background ${oswald.variable} ${sourceSerif4.variable}`}
       >
       {children}
       <Toaster/>

@@ -13,7 +13,7 @@ const InputIcon = ({fieldState, validation, icon, defaultClassName}: InputIconPr
   return <div className={twMerge(`relative ${!validation && !icon ? "w-0 h-0" : "w-6 h-5"}`)}>
     <Icon name="warning" className={warningIconClasses}/>
     {icon?.showIcon && icon?.name && (
-        <Icon name={icon?.name} className={regularIconClasses}/>
+        <Icon name={icon.name} className={regularIconClasses}/>
     )}
   </div>
 }

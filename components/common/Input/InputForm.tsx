@@ -1,9 +1,9 @@
-import React, {forwardRef} from "react";
+import React, {ComponentPropsWithoutRef, forwardRef} from "react";
 import {icons} from "@/components/common/Icon";
 import {
   Controller,
-  ControllerFieldState,
-  ControllerRenderProps,
+  ControllerFieldState, ControllerProps,
+  ControllerRenderProps, FieldPath,
   FieldValues
 } from "react-hook-form";
 import TextInput from "@/components/common/Input/TextInput";
@@ -30,6 +30,12 @@ export interface InputProps {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
+
+type TextInputProps<
+    TFieldValues extends FieldValues = FieldValues,
+    TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+> = Pick<ControllerProps<TFieldValues, TName>, 'name' | 'control'> &
+    ComponentPropsWithoutRef<'input'>
 
 export interface ValidationProps {
   control?: any,
@@ -66,31 +72,18 @@ export interface IDefaultClassName {
 }
 
 const InputForm = forwardRef<HTMLInputElement, Props>(
-    ({
-       label,
-       input,
-       icon,
-       variant,
-       groupClassName,
-       wrapperClassName,
-       validation
-     }, ref) => {
+    (props, ref) => {
 
       return (
           <>
-            {validation?.control ? <Controller
-                name={input.name}
-
-                control={validation?.control}
+            {props?.validation?.control ? <Controller
+                name={props?.input.name}
+                control={props?.validation?.control}
                 render={({field, fieldState}) => (
-                    <TextInput label={label} input={input} icon={icon} variant={variant}
-                               groupClassName={groupClassName} wrapperClassName={wrapperClassName}
-                               validation={validation} fieldState={fieldState} field={field}/>
+                    <TextInput {...props} fieldState={fieldState} field={field}/>
                 )
                 }
-            /> : <TextInput label={label} input={input} icon={icon} variant={variant}
-                            groupClassName={groupClassName} wrapperClassName={wrapperClassName}
-                            validation={validation} ref={ref}/>}
+            /> : <TextInput {...props} ref={ref}/>}
           </>
 
       );

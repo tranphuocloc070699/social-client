@@ -8,6 +8,13 @@ export default {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: "16px",
+        md: "24px",
+      }
+    },
     extend: {
       fontFamily: {
         serif: ['var(--font-source-serif-4)', 'serif'],

@@ -11,11 +11,13 @@ import Typography from "@/components/common/Typography";
 import background from "@/public/assets/images/login-background.png";
 import mobileBackgroundTop from "@/public/assets/images/mobile-bg-top.svg";
 import mobileBackgroundBottom from "@/public/assets/images/mobile-bg-bot.svg";
+import googleIcon from "@/public/assets/images/google-icon.svg";
 import logo from "@/public/assets/images/Logo.svg"
 import * as yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {useForm} from "react-hook-form";
 import UserService from "@/services/modules/user.service";
+import Link from "next/link";
 
 interface Props {
   type: "login" | "signup";
@@ -88,7 +90,6 @@ const AuthContainer = ({type}: Props) => {
     if (type === "login") {
       response = await userService.login(data);
     }
-    console.log({response});
     if (response?.success) {
       toast({variant: "default", title: "Đăng ký thành công"});
     } else {
@@ -97,6 +98,10 @@ const AuthContainer = ({type}: Props) => {
         title: "Có lỗi xảy ra",
       });
     }
+  }
+
+  function handleSocialAuth() {
+
   }
 
 
@@ -136,7 +141,7 @@ const AuthContainer = ({type}: Props) => {
             height={45}
         />
         <div
-            className="absolute left-[50%] translate-y-[-50%] top-[50%] translate-x-[-50%] z-10 bg-sh-secondary-300 rounded-lg md:p-6 p-4 flex flex-col gap-2 items-center justify-center md:w-[500px] w-[80%]">
+            className="absolute left-[50%] translate-y-[-50%] top-[50%] translate-x-[-50%] z-10 bg-sh-secondary-300 rounded-lg md:px-6 md:py-10 p-4 flex flex-col gap-2 items-center justify-center md:w-[500px] w-[80%]">
           <Typography.H2>{data[type].title}</Typography.H2>
           {type === "signup" &&
 							<InputForm icon={{name: "user", showIcon: true}}
@@ -208,12 +213,29 @@ const AuthContainer = ({type}: Props) => {
           <Button loading={isSubmitting}
                   type={"submit"}
                   variant={"primary"}>{data[type].title}</Button>
+          <div className={"flex items-center justify-between w-full"}>
+            {type === "login" ?
+                <span
+                    className={"text-sh-text font-semibold text-nowrap cursor-pointer text-sm "}>Quên mật khẩu</span> : <></>}
+            <span
+                className={" w-full text-right text-sh-secondary-100 flex items-center justify-end gap-1"}>{data[type].switchTitle}
+              <Link className={"underline text-sh-primary font-semibold"}
+                    href={data[type].switchLink}>{data[type].switchBtnLabel}</Link>
+          </span>
+          </div>
           <div className="flex items-center justify-center p-5 relative w-full">
             <Typography.Label
-                className={"bg-sh-secondary-300 text-sh-secondary-100"}>Hoặc</Typography.Label>
+                className={"bg-sh-secondary-300 text-sh-secondary-100 z-10 px-4"}>Hoặc</Typography.Label>
             <div
-                className={"bg-sh-secondary-100 absolute h-[1px] w-full top-[50%] left-0 right-0 translate-x-[-50%]"}></div>
+                className={"bg-sh-secondary-100 absolute h-[1px] w-full "}></div>
           </div>
+          <Button loading={isSubmitting}
+                  onClick={() => handleSocialAuth()}
+                  icon={{showIcon: true, name: "/assets/images/google-icon.svg"}}
+                  variant={"primary"}
+                  className={"bg-sh-secondary-200 text-sh-text tracking-wide  shadow-sm shadow-sh-background"}>Google</Button>
+
+
         </div>
       </form>
 
