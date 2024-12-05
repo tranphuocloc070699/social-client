@@ -31,7 +31,7 @@ const SwitchList = () => {
               {Array.from({length: 10}, (_, index) => index + 1).map((item, index) => (
                   <CarouselItem
                       key={index}
-                      className="md:basis-1/2  xl:basis-1/4 2xl:basis-1/6 pl-8"
+                      className="basis-1/2  xl:basis-1/4 2xl:basis-1/6 pl-8"
                   >
                     <div className={"rounded-lg bg-sh-secondary-200 "}>
                       <NextImg

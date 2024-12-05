@@ -6,6 +6,7 @@ import {usePathname} from "next/navigation";
 import HeaderMenuItem from "@/components/common/Header/HeaderMenuItem";
 import Button from "@/components/common/Button";
 import HeaderUser from "@/components/common/Header/HeaderUser";
+import HeaderSearch from "@/components/common/Header/HeaderSearch";
 
 export type HeaderItem = {
   title: string;
@@ -69,16 +70,19 @@ const HeaderMenu = ({className}: Props) => {
         </section>
 
         <section className={"md:hidden"}>
-          <div className={"relative w-8 h-8 "}>
-            <Icon name={"xMark"} size={32}
-                  className={twMerge(`absolute inset-0   text-sh-primary cursor-pointer  transition-all duration-300 ${isOpenMenu ? "opacity-100 z-10" : "opacity-0 z-0"}`)}
-                  onClick={closeMenu}/>
-            <Icon name={"menu"} size={32}
-                  className={twMerge(`absolute inset-0  text-sh-primary cursor-pointer  transition-all duration-300 ${isOpenMenu ? "opacity-0 z-0" : "opacity-100 z-10"}`)}
-                  onClick={openMenu}/>
+          <div className={"flex items-center gap-5"}>
+            <HeaderSearch/>
+            <div className={"relative w-8 h-8 "}>
+              <Icon name={"xMark"} size={32}
+                    className={twMerge(`absolute inset-0   text-sh-primary cursor-pointer  transition-all duration-300 ${isOpenMenu ? "opacity-100 z-10" : "opacity-0 z-0"}`)}
+                    onClick={closeMenu}/>
+              <Icon name={"menu"} size={32}
+                    className={twMerge(`absolute inset-0  text-sh-primary cursor-pointer  transition-all duration-300 ${isOpenMenu ? "opacity-0 z-0" : "opacity-100 z-10"}`)}
+                    onClick={openMenu}/>
+            </div>
           </div>
           <div
-              className={twMerge(`md:block md:top-0  transition-all duration-300 h-full right-[-768px] w-full  bg-sh-background fixed top-[64px] border-t-[3px]  border-t-sh-primary ${isOpenMenu && "right-0"}`)}>
+              className={twMerge(`md:block md:top-0  transition-all duration-300 h-full right-[-768px] w-full  bg-sh-background z-10 fixed top-[64px] border-t-[3px]  border-t-sh-primary ${isOpenMenu && "right-0"}`)}>
             <HeaderUser className={"justify-between border-b border-sh-primary p-4 "}/>
             <div
                 className={"md:flex md:items-center md:justify-between grid grid-cols-2 gap-4 px-4 mt-4"}>

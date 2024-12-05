@@ -10,7 +10,7 @@ import HeaderUser from "@/components/common/Header/HeaderUser";
 const Header = () => {
   return (
       <div component-name="Header"
-           className={"container bg-sh-background md:h-20 h-16 grid grid-cols-12"}>
+           className={"md:px-6 px-4 bg-sh-background md:h-20 h-16 grid grid-cols-12"}>
         <Logo className={"col-span-3"}/>
         <HeaderMenu className={"md:col-span-6 col-span-9"}/>
         <HeaderUser className={"md:flex hidden col-span-3 justify-end"}/>

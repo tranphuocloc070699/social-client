@@ -19,7 +19,7 @@ import {
   House,
   Keyboard,
   Menu,
-  ChevronDown, MoveRight,
+  ChevronDown, MoveRight, Search,
 } from "lucide-react";
 import NextImg from "next/image";
 
@@ -45,7 +45,8 @@ export const icons = {
   keyboard: <Keyboard/>,
   menu: <Menu/>,
   chevronDown: <ChevronDown/>,
-  moveRight: <MoveRight/>
+  moveRight: <MoveRight/>,
+  search: <Search/>
 } as const;
 
 interface Props {
