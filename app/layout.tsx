@@ -1,7 +1,9 @@
-import type {Metadata} from "next";
-import {Oswald, Source_Serif_4} from "next/font/google";
+import type { Metadata } from "next";
+import { Oswald, Source_Serif_4 } from "next/font/google";
 import "./globals.css";
-import {Toaster} from "@/components/ui/toaster";
+import { Toaster } from "@/components/ui/toaster";
+import Header from "@/components/common/header/header";
+import Footer from "@/components/common/footer";
 
 const oswald = Oswald({
   weight: ["300", "400", "500", "600", "700"],
@@ -24,19 +26,21 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-                                     children,
-                                   }: Readonly<{
+  children,
+}: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-      <html lang="en">
+    <html lang="en">
       <body
-          suppressHydrationWarning={true}
-          className={`bg-sh-background ${oswald.variable} ${sourceSerif4.variable}`}
+        suppressHydrationWarning={true}
+        className={`space-y-8 bg-sh-background md:space-y-10 ${oswald.variable} ${sourceSerif4.variable}`}
       >
-      {children}
-      <Toaster/>
+        <Header></Header>
+        {children}
+        <Footer></Footer>
+        <Toaster />
       </body>
-      </html>
+    </html>
   );
 }

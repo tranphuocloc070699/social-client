@@ -1,19 +1,41 @@
 import Image from "next/image";
-import Header from "@/components/common/Header/Header";
-import Footer from "@/components/common/Footer";
-import BlockTitle from "@/components/common/BlockTitle";
-import SwitchList from "@/components/specific/Switch/SwitchList";
+import Header from "@/components/common/header/header";
+import Footer from "@/components/common/footer";
+import BlockTitle from "@/components/common/block-title";
+import SwitchList from "@/components/specific/switch/switch-list";
+import Banner from "@/components/common/banner";
+import PostList from "@/components/specific/post/post-list";
 
-
-export default function Home() {
+export default function HomePage() {
   return (
-      <div>
-        <Header></Header>
-        <BlockTitle title={"Bàn phím"} icon={{showIcon: true, name: "keyboard"}} showAllPath={"/"}>
-          <SwitchList/>
-        </BlockTitle>
+    <div className={"space-y-10"}>
+      <Banner></Banner>
+      <BlockTitle
+        title={"switch"}
+        icon={{ showIcon: true, name: "keyboard" }}
+        showAllPath={"/"}
+        className={"px-4 md:px-6"}
+      >
+        <SwitchList />
+      </BlockTitle>
 
-        <Footer></Footer>
-      </div>
+      <BlockTitle
+        title={"Bàn phím"}
+        icon={{ showIcon: true, name: "keyboard" }}
+        showAllPath={"/"}
+        className={"px-4 md:px-6"}
+      >
+        <SwitchList />
+      </BlockTitle>
+
+      <BlockTitle
+        title={"Mod phím"}
+        icon={{ showIcon: true, name: "keyboard" }}
+        showAllPath={"/"}
+        className={"px-4 md:px-6"}
+      >
+        <PostList />
+      </BlockTitle>
+    </div>
   );
 }

@@ -2,10 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 body {
   font-family: var(--font-source-serif-4), Arial, Helvetica, sans-serif;
 }
+
 
 @layer base {
   :root {
