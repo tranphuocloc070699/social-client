@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useRef } from "react";
 import Button from "@/components/common/button";
 import { twMerge } from "tailwind-merge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -11,6 +13,10 @@ type Props = {
   className?: string;
 };
 const HeaderUser = ({ className }: Props) => {
+  const path = useRef({
+    auth: "/dang-nhap",
+  });
+
   return (
     <div className={twMerge(`flex items-center gap-6 ${className}`)}>
       {/*<section className={"flex items-center justify-between w-full"}>*/}
@@ -32,7 +38,9 @@ const HeaderUser = ({ className }: Props) => {
 
       <section className={"flex items-center gap-6"}>
         <HeaderSearch className={"hidden md:block"} />
-        <Icon name={"user"} size={32} className={"text-sh-primary"} />
+        <Link href={path.current.auth}>
+          <Icon name={"user"} size={32} className={"text-sh-primary"} />
+        </Link>
         {/*<button asLink={"/dang-ky"} variant={"primary"}*/}
         {/*        className={"bg-sh-secondary-300 border border-sh-secondary-100 text-sh-text w-[112px]"}>Đăng*/}
         {/*  ký</button>*/}

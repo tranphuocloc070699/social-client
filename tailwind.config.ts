@@ -20,6 +20,13 @@ export default {
         serif: ["var(--font-source-serif-4)", "serif"],
         sans: ["var(--font-oswald)", "sans-serif"],
       },
+      spacing: {
+        "large-pc": "40px",
+        "large-mobile": "32px",
+
+        "medium-pc": "24px",
+        "medium-mobile": "16px",
+      },
       colors: {
         "sh-primary": "#cfbb96",
         "sh-background": "#131817",

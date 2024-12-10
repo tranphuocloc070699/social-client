@@ -24,7 +24,7 @@ const ProductPropertyItem = ({ className, title, value, icon }: Props) => {
         </Typography.Label>
       </div>
       <Typography.Text
-        className={"absolute inset-0 mt-6 pt-4 text-center text-xl font-medium"}
+        className={"absolute inset-0 mt-6 pt-4 text-center text-xl font-normal"}
       >
         {value}
       </Typography.Text>

@@ -31,7 +31,7 @@ const Tabs = ({ onChange }: Props) => {
         <span
           key={item.id}
           className={twMerge(
-            `cursor-pointer text-lg font-semibold text-sh-secondary-100 transition-all duration-300 ${activeTab === item.id && "text-sh-text"}`
+            `cursor-pointer font-sans text-lg font-normal text-sh-secondary-100 transition-all duration-300 ${activeTab === item.id && "text-sh-text"}`
           )}
           onClick={() => handleTabItemClick(item.id)}
         >

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Oswald, Source_Serif_4 } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import Header from "@/components/common/header/header";
 import Footer from "@/components/common/footer";
@@ -34,11 +34,9 @@ export default function RootLayout({
     <html lang="en">
       <body
         suppressHydrationWarning={true}
-        className={`space-y-8 bg-sh-background md:space-y-10 ${oswald.variable} ${sourceSerif4.variable}`}
+        className={`space-y-8 overflow-x-hidden bg-sh-background md:space-y-10 ${oswald.variable} ${sourceSerif4.variable}`}
       >
-        <Header></Header>
         {children}
-        <Footer></Footer>
         <Toaster />
       </body>
     </html>

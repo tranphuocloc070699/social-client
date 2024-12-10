@@ -10,7 +10,7 @@ const HeaderMenuItem = ({ title, path, icon, isActive }: HeaderItem) => {
       <Link
         href={path}
         className={twMerge(
-          `hidden text-lg font-semibold text-sh-primary brightness-75 md:block ${isActive && "text-sh-text brightness-200"}`
+          `hidden font-sans text-xl font-normal text-sh-text brightness-75 md:block ${isActive && "text-sh-primary brightness-125"}`
         )}
       >
         {title}
@@ -18,10 +18,13 @@ const HeaderMenuItem = ({ title, path, icon, isActive }: HeaderItem) => {
       <Link
         href={path}
         className={twMerge(
-          `flex h-[160px] flex-col items-center justify-center gap-4 rounded-lg bg-sh-secondary-300 text-sh-primary md:hidden md:h-full ${isActive && "brightness-200"}`
+          `flex h-[160px] flex-col items-center justify-center gap-4 rounded-lg bg-sh-secondary-300 font-sans text-xl font-normal text-sh-text brightness-75 md:hidden md:h-full ${isActive && "text-sh-primary brightness-125"}`
         )}
       >
-        <Icon name={icon} className={"text-sh-primary"} />
+        <Icon
+          name={icon}
+          className={twMerge(`text-sh-text ${isActive && "text-sh-primary"}`)}
+        />
         {title}
       </Link>
     </>

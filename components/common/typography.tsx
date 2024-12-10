@@ -43,7 +43,7 @@ const Typography = {
       <h3
         ref={ref}
         className={twMerge(
-          `scroll-m-20 font-sans text-2xl font-semibold tracking-tight text-sh-text ${className}`
+          `scroll-m-20 font-sans text-2xl font-medium tracking-tight text-sh-text ${className}`
         )}
         {...props}
       >
@@ -57,7 +57,7 @@ const Typography = {
       <h4
         ref={ref}
         className={twMerge(
-          `scroll-m-20 font-sans text-xl font-semibold text-sh-text ${className}`
+          `scroll-m-20 font-sans text-xl font-medium text-sh-text ${className}`
         )}
         {...props}
       >

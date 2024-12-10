@@ -1,17 +1,22 @@
-import React, { forwardRef, useMemo, useState } from "react";
+import React, { forwardRef, useCallback, useMemo, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import Typography from "@/components/common/typography";
 import Icon from "@/components/common/icon";
-import { IDefaultClassName, Props } from "@/components/common/input/InputForm";
+import {
+  IDefaultClassName,
+  InputProps,
+} from "@/components/common/input/InputForm";
 import InputIcon from "@/components/common/input/InputIcon";
+import lodashDebounce from "lodash/debounce";
 
-const TextInput = forwardRef<HTMLInputElement, Props>(
+const TextInput = forwardRef<HTMLInputElement, InputProps>(
   (
     {
       label,
       input,
       icon,
       variant,
+      debounce,
       groupClassName,
       wrapperClassName,
       validation,
@@ -69,13 +74,20 @@ const TextInput = forwardRef<HTMLInputElement, Props>(
       return input?.type || "text";
     }, [input?.type, showPassword]);
 
-    // Number validation function
     const numberValidation = (value: string): boolean => /^-?\d*$/.test(value);
 
+    const debouncedSearch = React.useRef(
+      lodashDebounce(async (e) => {
+        if (debounce && debounce?.callback) debounce.callback(e);
+      }, debounce?.duration || 300)
+    ).current;
+
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (!input?.onChange) return;
       if (input?.type === "number" && !numberValidation(e.target.value)) return;
-      input.onChange(e);
+      if (input?.onChange) {
+        input.onChange(e);
+      }
+      if (debounce) debouncedSearch(e);
     };
 
     const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -121,16 +133,18 @@ const TextInput = forwardRef<HTMLInputElement, Props>(
           )}
         </span>
 
-        <p
-          className={twMerge(
-            `mt-1 h-6 transform text-sm text-red-500 transition-all duration-300 ease-in-out`,
-            fieldState?.error?.message
-              ? "translate-y-0 opacity-100"
-              : "-translate-y-5 opacity-0"
-          )}
-        >
-          {fieldState?.error?.message}
-        </p>
+        {field && (
+          <p
+            className={twMerge(
+              `mt-1 h-6 transform text-sm text-red-500 transition-all duration-300 ease-in-out`,
+              fieldState?.error?.message
+                ? "translate-y-0 opacity-100"
+                : "-translate-y-5 opacity-0"
+            )}
+          >
+            {fieldState?.error?.message}
+          </p>
+        )}
       </div>
     );
   }

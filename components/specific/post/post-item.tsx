@@ -32,7 +32,9 @@ const PostItem = ({ loading, className }: Props) => {
           <Typography.H4 className={"px-4 text-left"}>
             Cách mod phím với băng keo 3M
           </Typography.H4>
-          <Typography.Paragraph className={"mt-2 px-4 text-left text-sh-text"}>
+          <Typography.Paragraph
+            className={"mt-2 px-4 text-left text-sm text-sh-text"}
+          >
             Cách mod để phím có âm thanh hay nhất
           </Typography.Paragraph>
         </span>

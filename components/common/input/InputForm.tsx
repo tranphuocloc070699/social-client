@@ -22,7 +22,7 @@ export interface IconProps {
   className?: string;
 }
 
-export interface InputProps {
+export interface TextInputProps {
   type?: string;
   placeholder: string;
   value?: string;
@@ -33,11 +33,11 @@ export interface InputProps {
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
-type TextInputProps<
-  TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
-> = Pick<ControllerProps<TFieldValues, TName>, "name" | "control"> &
-  ComponentPropsWithoutRef<"input">;
+// type TextInputProps<
+//   TFieldValues extends FieldValues = FieldValues,
+//   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+// > = Pick<ControllerProps<TFieldValues, TName>, "name" | "control"> &
+//   ComponentPropsWithoutRef<"input">;
 
 export interface ValidationProps {
   control?: any;
@@ -46,11 +46,17 @@ export interface ValidationProps {
   errors?: any;
 }
 
-export interface Props {
+export interface DebounceProps {
+  duration?: number;
+  callback?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export interface InputProps {
   label?: LabelProps;
   icon?: IconProps;
-  input: InputProps;
+  input: TextInputProps;
   validation?: ValidationProps;
+  debounce?: DebounceProps;
   groupClassName?: string;
   wrapperClassName?: string;
   variant?: "primary" | "secondary" | false;
@@ -73,7 +79,7 @@ export interface IDefaultClassName {
   wrapper: string;
 }
 
-const InputForm = forwardRef<HTMLInputElement, Props>((props, ref) => {
+const InputForm = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   return (
     <>
       {props?.validation?.control ? (

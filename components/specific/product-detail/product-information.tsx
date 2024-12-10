@@ -18,7 +18,7 @@ const ProductInformation = ({ className }: Props) => {
       className={twMerge(`flex flex-col gap-4 md:gap-6 ${className}`)}
     >
       <div className={twMerge(`flex items-center justify-between`)}>
-        <Typography.H2 className={"text-sh-primary"}>
+        <Typography.H2 className={"font-normal text-sh-primary"}>
           Placeholder Text
         </Typography.H2>
         <IconCounting count={20} icon={{ name: "emptyHeart" }} />

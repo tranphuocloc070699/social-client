@@ -24,6 +24,9 @@ import {
   Search,
   ChevronRight,
   BadgeDollarSign,
+  Minus,
+  SlidersHorizontal,
+  Loader,
 } from "lucide-react";
 import NextImg from "next/image";
 
@@ -52,6 +55,9 @@ export const icons = {
   moveRight: <MoveRight />,
   search: <Search />,
   dollar: <BadgeDollarSign />,
+  minus: <Minus />,
+  filters: <SlidersHorizontal />,
+  spinner: <Loader />,
 } as const;
 
 interface Props {
@@ -63,7 +69,6 @@ interface Props {
 
 const Icon = ({ name, className, size, onClick }: Props) => {
   const getIcon = useMemo(() => {
-    console.log({ name });
     const isIcon = name in icons;
     if (isIcon) {
       const icon = icons[name as keyof typeof icons];

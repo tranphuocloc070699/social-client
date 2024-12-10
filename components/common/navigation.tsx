@@ -12,11 +12,17 @@ const Navigation = ({ className }: Props) => {
       component-name="Navigation"
       className={twMerge(`flex items-center gap-1 ${className}`)}
     >
-      <span className={"font-sans text-base font-normal text-sh-primary"}>
+      <span
+        className={"font-sans text-base font-normal text-sh-text brightness-75"}
+      >
         Trang chủ
       </span>
-      <Icon name={"chevronRight"} size={16} className={"text-sh-text"} />
-      <span className={"font-sans text-base font-semibold text-sh-text"}>
+      <Icon
+        name={"chevronRight"}
+        size={16}
+        className={"text-sh-text brightness-75"}
+      />
+      <span className={"font-sans text-base font-medium text-sh-primary"}>
         HMX Ziwei
       </span>
     </div>

@@ -10,7 +10,7 @@ import {
 import NextImg from "next/image";
 import Autoplay from "embla-carousel-autoplay";
 import { twMerge } from "tailwind-merge";
-import useCustomState from "@/hooks/use-state";
+import useCustomState from "@/hooks/use-field";
 import useCarouselApi from "@/hooks/use-carousel-api";
 
 const Banner = () => {

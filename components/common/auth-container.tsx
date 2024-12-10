@@ -105,7 +105,7 @@ const AuthContainer = ({ type }: Props) => {
   return (
     <form
       onSubmit={handleSubmit((data) => onSubmit(data))}
-      className="relative flex min-h-screen w-full items-center justify-center bg-sh-secondary-300 p-5 md:bg-sh-background"
+      className="relative flex h-screen w-full items-center justify-center overflow-hidden bg-sh-secondary-300 p-5 md:bg-sh-background"
     >
       <NextImg
         className="absolute inset-0 hidden h-full w-full object-cover md:block"
@@ -208,7 +208,12 @@ const AuthContainer = ({ type }: Props) => {
             }}
           />
         )}
-        <Button loading={isSubmitting} type={"submit"} variant={"primary"}>
+        <Button
+          loading={isSubmitting}
+          type={"submit"}
+          variant={"primary"}
+          className={"w-full"}
+        >
           {data[type].title}
         </Button>
         <div className={"flex w-full items-center justify-between"}>
@@ -251,7 +256,7 @@ const AuthContainer = ({ type }: Props) => {
           icon={{ showIcon: true, name: "/assets/images/google-icon.svg" }}
           variant={"primary"}
           className={
-            "bg-sh-secondary-200 tracking-wide text-sh-text shadow-sm shadow-sh-background"
+            "w-full bg-sh-secondary-200 tracking-wide text-sh-text shadow-sm shadow-sh-background"
           }
         >
           Google

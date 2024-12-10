@@ -10,6 +10,7 @@ type Props = {
   title: string;
   icon?: IconProps;
   showAllPath?: string;
+  showAllElement?: React.ReactNode;
   children: React.ReactNode;
 };
 const BlockTitle = ({
@@ -17,6 +18,7 @@ const BlockTitle = ({
   title,
   icon,
   showAllPath,
+  showAllElement,
   children,
 }: Props) => {
   return (
@@ -43,6 +45,7 @@ const BlockTitle = ({
             <Icon name={"moveRight"} className={"text-sh-text"} size={16} />
           </Link>
         )}
+        {showAllElement && <div className={"md:hidden"}>{showAllElement}</div>}
       </div>
       <div className={"mt-4"}>{children}</div>
     </section>

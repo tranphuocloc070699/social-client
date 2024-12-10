@@ -13,7 +13,7 @@ export interface ButtonProps {
   children?: React.ReactNode;
   asLink?: string;
   type?: "button" | "submit" | "reset";
-  variant?: "primary" | "secondary" | false;
+  variant?: "primary" | "shadcn" | "secondary" | false;
   showChildren?: boolean;
   icon?: IconProps;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;

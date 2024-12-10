@@ -1,3 +1,5 @@
+"use client";
+
 import React, { forwardRef, useMemo } from "react";
 import { twMerge } from "tailwind-merge";
 import SpinnerLoading from "@/components/common/spinner-loading";
@@ -15,7 +17,6 @@ const ButtonContent = forwardRef<HTMLButtonElement, ButtonProps>(
       children,
       variant,
       type = "button",
-      asLink,
       showChildren = true,
       icon,
       onClick,
@@ -23,21 +24,21 @@ const ButtonContent = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const classNameProcessor = useMemo(() => {
-      let classNameGeneral = ` flex items-center justify-center text-center gap-2 font-sans font-medium text-base tracking-wider px-4 h-10 rounded-lg w-full cursor-pointer disabled:cursor-not-allowed disabled:opacity-10 md:text-sm }`;
+      let classNameGeneral = `inline-flex h-10 items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-10 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0`;
       const defaultVariant = variant ? variant : "primary";
 
       switch (defaultVariant) {
         case "primary":
-          classNameGeneral = classNameGeneral.concat(
-            " bg-sh-primary text-sh-background"
-          );
+          classNameGeneral += " bg-sh-primary text-sh-background";
+          break;
+        case "shadcn":
+          classNameGeneral += " bg-sh-primary text-sh-background";
           break;
         default:
           break;
       }
-      console.log({ className });
       return `${classNameGeneral} ${className}`;
-    }, [variant]);
+    }, [variant, className]);
 
     function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
       if (loading) return;
@@ -51,26 +52,16 @@ const ButtonContent = forwardRef<HTMLButtonElement, ButtonProps>(
         type={type}
         disabled={disabled}
         ref={ref}
-        className={twMerge(` ${classNameProcessor}`)}
+        className={twMerge(`${classNameProcessor}`)}
         onClick={handleClick}
       >
-        <div
-          className={twMerge(
-            `relative transition-all ${loading || icon?.showIcon ? "h-7 w-7 opacity-100" : "h-0 w-0 opacity-0"}`
-          )}
-        >
-          <SpinnerLoading
-            className={twMerge(
-              `absolute inset-0 h-full w-full transition-all ${loading ? "opacity-100" : "opacity-0"}`
-            )}
-          />
-          <Icon
-            name={icon?.name}
-            className={twMerge(
-              `absolute inset-0 h-full w-full transition-all ${icon?.showIcon && !loading ? "opacity-100" : "opacity-0"}`
-            )}
-          />
-        </div>
+        {loading && <SpinnerLoading className={twMerge(``)} />}
+        {icon?.showIcon && !loading && (
+          <div>
+            <Icon name={icon?.name} size={16} />
+          </div>
+        )}
+
         {showChildren && children}
       </button>
     );

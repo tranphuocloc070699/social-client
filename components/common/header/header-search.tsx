@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import Icon from "@/components/common/icon";
 import { twMerge } from "tailwind-merge";
@@ -47,7 +49,7 @@ const HeaderSearch = ({ className }: Props) => {
       <section className={"hidden md:block"}>
         <div
           className={twMerge(
-            `relative flex h-10 items-center justify-end gap-2 rounded-lg bg-sh-secondary-200 p-2 transition-all duration-300 ${isOpenSearch ? "w-[320px]" : "w-10"}`
+            `relative flex h-10 items-center justify-end gap-2 overflow-hidden rounded-lg bg-sh-secondary-200 p-2 transition-all duration-300 ${isOpenSearch ? "w-[320px]" : "w-10"}`
           )}
         >
           <div className={"absolute h-10 w-full"}>
@@ -96,7 +98,7 @@ const HeaderSearch = ({ className }: Props) => {
         />
         <div
           className={twMerge(
-            `fixed bottom-0 right-[-768px] top-0 z-20 h-full w-full border-t-[3px] border-sh-primary border-t-sh-primary bg-sh-background transition-all duration-300 md:hidden ${isOpenSearch && "right-0"}`
+            `fixed bottom-0 right-[-768px] top-0 z-50 h-full w-0 border-t-[3px] border-sh-primary border-t-sh-primary bg-sh-background transition-all duration-300 md:hidden ${isOpenSearch && "right-0 w-full"}`
           )}
         >
           <div className={"p-4"}>
@@ -134,7 +136,11 @@ const HeaderSearch = ({ className }: Props) => {
               ></Button>
             </div>
             <div className={"mt-6"}>
-              <Typography.Label>Lịch sử tìm kiếm</Typography.Label>
+              <Typography.Label
+                className={"text-lg text-sh-primary brightness-125"}
+              >
+                Lịch sử tìm kiếm
+              </Typography.Label>
               <div
                 className={
                   "item-center mt-2 flex flex-wrap gap-4 border-t border-sh-primary pt-4"

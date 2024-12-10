@@ -37,7 +37,6 @@ const ProductGallery = ({ className }: Props) => {
   const [imageSelected, setImageSelected] = React.useState(images[0]);
 
   const orientation = useMemo(() => {
-    console.log({ isMobile });
     return isMobile ? "horizontal" : "vertical";
   }, [isMobile]);
   console.log({ orientation });
@@ -74,12 +73,13 @@ const ProductGallery = ({ className }: Props) => {
           }}
           orientation={orientation}
           setApi={setApi}
+          className="w-full"
         >
           <CarouselContent className="-ml-4 md:-mt-4 md:h-[568px]">
             {images.map((image, index) => (
               <CarouselItem
                 key={index}
-                className="basis-1/4 pl-4 md:basis-1/6 md:pt-4 xl:basis-1/6 2xl:basis-1/6"
+                className="basis-1/4 pl-4 md:basis-1/4 md:pt-4"
               >
                 <NextImg
                   src={image}

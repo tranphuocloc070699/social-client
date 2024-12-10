@@ -18,7 +18,7 @@ const ProductPrice = ({ className, title, value }: Props) => {
       )}
     >
       <Typography.Label className={"block"}>{title}</Typography.Label>
-      <Typography.Text className={"mt-4 block text-4xl font-medium"}>
+      <Typography.Text className={"mt-4 block text-3xl font-medium"}>
         {value}
       </Typography.Text>
     </div>

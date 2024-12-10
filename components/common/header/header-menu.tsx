@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import Icon, { icons } from "@/components/common/icon";
 import Link from "next/link";
@@ -102,7 +103,7 @@ const HeaderMenu = ({ className }: Props) => {
         </div>
         <div
           className={twMerge(
-            `fixed right-[-768px] top-[64px] z-10 h-full w-full border-t-[3px] border-t-sh-primary bg-sh-background transition-all duration-300 md:top-0 md:block ${isOpenMenu && "right-0"}`
+            `fixed right-[-768px] top-[64px] z-40 h-full w-0 border-t-[3px] border-t-sh-primary bg-sh-background transition-all duration-300 md:top-0 md:block ${isOpenMenu && "right-0 w-full"}`
           )}
         >
           <HeaderUser
