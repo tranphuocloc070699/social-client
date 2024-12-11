@@ -1,8 +1,6 @@
 import React from "react";
 import Typography from "@/components/common/typography";
 import { Button } from "@/components/ui/button";
-import Icon from "@/components/common/icon";
-import SpinnerLoading from "@/components/common/spinner-loading";
 
 const Page = () => {
   return (

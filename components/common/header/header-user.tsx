@@ -1,52 +1,65 @@
 "use client";
 
 import React, { useRef } from "react";
-import Button from "@/components/common/button";
 import { twMerge } from "tailwind-merge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Icon from "@/components/common/icon";
 import Link from "next/link";
 import Typography from "@/components/common/typography";
 import HeaderSearch from "@/components/common/header/header-search";
+import { useUserStore } from "@/store/user.store";
 
 type Props = {
   className?: string;
 };
 const HeaderUser = ({ className }: Props) => {
+  const { user, isAuthenticated } = useUserStore();
   const path = useRef({
     auth: "/dang-nhap",
   });
 
+  console.log({ user });
+
   return (
     <div className={twMerge(`flex items-center gap-6 ${className}`)}>
-      {/*<section className={"flex items-center justify-between w-full"}>*/}
-      {/*  <div className={"flex items-center gap-2"}>*/}
-      {/*    <div className={"relative"}>*/}
-      {/*      <Avatar className={"border border-sh-text relative"}>*/}
-      {/*        <AvatarImage src="https://github.com/shadcn.png"/>*/}
-      {/*        <AvatarFallback>CN</AvatarFallback>*/}
-      {/*      </Avatar>*/}
-      {/*      <Icon name={"chevronDown"} size={12}*/}
-      {/*            className={"absolute rounded-full bg-sh-secondary-300 text-sh-text w-4 h-4 p-[2px] border border-sh-text right-[-2px] bottom-[-2px]"}/>*/}
-      {/*    </div>*/}
-      {/*    <Typography.Label className={"text-white"}>Trần Phước Lộc</Typography.Label>*/}
-      {/*  </div>*/}
-      {/*  <Link href={"/"} className={"flex items-center gap-2 text-sh-primary"}>Đến trang cá nhân*/}
-      {/*    <Icon name={"moveRight"} className={"text-sh-primary"}/>*/}
-      {/*  </Link>*/}
-      {/*</section>*/}
-
-      <section className={"flex items-center gap-6"}>
-        <HeaderSearch className={"hidden md:block"} />
-        <Link href={path.current.auth}>
-          <Icon name={"user"} size={32} className={"text-sh-primary"} />
-        </Link>
-        {/*<button asLink={"/dang-ky"} variant={"primary"}*/}
-        {/*        className={"bg-sh-secondary-300 border border-sh-secondary-100 text-sh-text w-[112px]"}>Đăng*/}
-        {/*  ký</button>*/}
-        {/*<button asLink={"/dang-nhap"} variant={"primary"} className={"w-[112px]"}>Đăng*/}
-        {/*  nhập</button>*/}
-      </section>
+      {isAuthenticated ? (
+        <section
+          className={"flex w-full items-center justify-between md:justify-end"}
+        >
+          <div className={"flex items-center gap-2"}>
+            <div className={"relative"}>
+              <Avatar className={"relative border border-sh-text"}>
+                <AvatarImage src="https://github.com/shadcn.png" />
+                <AvatarFallback>User</AvatarFallback>
+              </Avatar>
+              <Icon
+                name={"chevronDown"}
+                size={12}
+                className={
+                  "absolute bottom-[-2px] right-[-2px] h-4 w-4 rounded-full border border-sh-text bg-sh-secondary-300 p-[2px] text-sh-text"
+                }
+              />
+            </div>
+            <Typography.Label className={"text-white"}>
+              {user?.full_name}
+            </Typography.Label>
+          </div>
+          <Link
+            href={"/"}
+            className={"flex items-center gap-2 text-sh-primary md:hidden"}
+          >
+            Đến trang cá nhân
+            <Icon name={"moveRight"} className={"text-sh-primary"} />
+          </Link>
+        </section>
+      ) : (
+        <section className={"flex items-center gap-6"}>
+          <HeaderSearch className={"hidden md:block"} />
+          <Link href={path.current.auth}>
+            <Icon name={"plus"} size={32} className={"text-sh-primary"} />
+          </Link>
+        </section>
+      )}
     </div>
   );
 };

@@ -1,31 +1,36 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import InputForm from "@/components/common/input/InputForm";
 import { IAuthForm } from "@/types/user/user.interface";
 import { useToast } from "@/hooks/use-toast";
 import { useUserStore } from "@/store/user.store";
-import Button from "@/components/common/button";
+import { Button } from "@/components/ui/button";
 import NextImg from "next/image";
 import Typography from "@/components/common/typography";
 import background from "@/public/assets/images/login-background.png";
 import mobileBackgroundTop from "@/public/assets/images/mobile-bg-top.svg";
 import mobileBackgroundBottom from "@/public/assets/images/mobile-bg-bot.svg";
-import googleIcon from "@/public/assets/images/google-icon.svg";
 import logo from "@/public/assets/images/Logo.svg";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import UserService from "@/services/modules/user.service";
 import Link from "next/link";
+import SignupSuccessModal from "./modal/signup-success";
+import { useRouter } from "next/navigation";
 
 interface Props {
   type: "login" | "signup";
 }
 
 const AuthContainer = ({ type }: Props) => {
+  const router = useRouter();
   const { toast } = useToast();
   const userStore = useUserStore();
+  useEffect(() => {
+    console.log({ user: userStore.user });
+  }, [userStore.user]);
   const data = {
     login: {
       title: "Đăng nhập",
@@ -69,6 +74,7 @@ const AuthContainer = ({ type }: Props) => {
   const {
     control,
     handleSubmit,
+    reset,
     formState: { isSubmitting },
   } = useForm<IAuthForm>({
     resolver: yupResolver(schema),
@@ -82,6 +88,7 @@ const AuthContainer = ({ type }: Props) => {
 
   async function onSubmit(data: IAuthForm) {
     const userService = new UserService();
+    console.log("trigger...");
 
     let response;
     if (type === "signup") {
@@ -90,8 +97,48 @@ const AuthContainer = ({ type }: Props) => {
     if (type === "login") {
       response = await userService.login(data);
     }
-    if (response?.success) {
-      toast({ variant: "default", title: "Đăng ký thành công" });
+
+    if (
+      type === "login" &&
+      response?.status === 404 &&
+      response?.data?.message === "User Not Activated"
+    ) {
+      toast({
+        variant: "destructive",
+        description:
+          "Tài khoản này chưa xác thực email, vui lòng mở email và làm theo hướng dẫn để xác thực",
+      });
+      return;
+    }
+
+    if (
+      type === "login" &&
+      response?.status === 404 &&
+      response?.data?.message === "Invalid credentials"
+    ) {
+      toast({
+        variant: "destructive",
+        description: "Tài khoản hoặc mật khẩu không chính xác",
+      });
+      return;
+    }
+    if (type === "signup" && response?.status === 422) {
+      toast({
+        variant: "destructive",
+        description: "Tài khoản này đã tồn tại",
+      });
+      return;
+    }
+
+    if (response?.data?.success) {
+      if (type === "signup") {
+        signupSuccessModal.openModal();
+        reset();
+      } else {
+        userStore.setUser(response?.data?.data);
+        console.log({ data: response?.data?.data });
+        router.push("/");
+      }
     } else {
       toast({
         variant: "destructive",
@@ -102,11 +149,14 @@ const AuthContainer = ({ type }: Props) => {
 
   function handleSocialAuth() {}
 
+  const signupSuccessModal = SignupSuccessModal();
+
   return (
     <form
       onSubmit={handleSubmit((data) => onSubmit(data))}
       className="relative flex h-screen w-full items-center justify-center overflow-hidden bg-sh-secondary-300 p-5 md:bg-sh-background"
     >
+      {signupSuccessModal.content}
       <NextImg
         className="absolute inset-0 hidden h-full w-full object-cover md:block"
         src={background}
@@ -208,12 +258,7 @@ const AuthContainer = ({ type }: Props) => {
             }}
           />
         )}
-        <Button
-          loading={isSubmitting}
-          type={"submit"}
-          variant={"primary"}
-          className={"w-full"}
-        >
+        <Button loading={isSubmitting} type={"submit"} className={"w-full"}>
           {data[type].title}
         </Button>
         <div className={"flex w-full items-center justify-between"}>
@@ -253,8 +298,7 @@ const AuthContainer = ({ type }: Props) => {
         <Button
           loading={isSubmitting}
           onClick={() => handleSocialAuth()}
-          icon={{ showIcon: true, name: "/assets/images/google-icon.svg" }}
-          variant={"primary"}
+          icon={"google_local"}
           className={
             "w-full bg-sh-secondary-200 tracking-wide text-sh-text shadow-sm shadow-sh-background"
           }

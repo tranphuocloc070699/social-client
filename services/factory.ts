@@ -32,24 +32,23 @@ class HttpFactory {
   }
 
   async call<T>({
-                  method,
-                  url,
-                  fetchOptions,
-                  body,
-                  params
-                }: IHttpFactory): Promise<T> {
-
+    method,
+    url,
+    fetchOptions,
+    body,
+    params,
+  }: IHttpFactory): Promise<{ data: T; status: number }> {
     const headers = new Headers({
       ...(this.accessToken && {
-        Authorization: `Bearer ${this.accessToken}`
-      })
+        Authorization: `Bearer ${this.accessToken}`,
+      }),
     });
 
     const options: RequestInit = {
       method,
       headers,
       cache: "no-store",
-      ...fetchOptions
+      ...fetchOptions,
     };
     if (body) {
       if (body instanceof FormData) options.body = body as BodyInit;
@@ -66,8 +65,10 @@ class HttpFactory {
         newUrl = `${url}?${new URLSearchParams(params)}`;
       }
       const response = await fetch(newUrl, options);
+      const status = response.status;
+      const data: T = await response.json();
 
-      return await response.json();
+      return { status, data };
     } catch (error) {
       throw new Error(`Fetch error: ${(error as Error).message}`);
     }

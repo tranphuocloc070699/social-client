@@ -58,6 +58,7 @@ export const icons = {
   minus: <Minus />,
   filters: <SlidersHorizontal />,
   spinner: <Loader />,
+  google_local: "/assets/images/google-icon.svg",
 } as const;
 
 interface Props {
@@ -68,9 +69,11 @@ interface Props {
 }
 
 const Icon = ({ name, className, size, onClick }: Props) => {
-  const getIcon = useMemo(() => {
-    const isIcon = name in icons;
-    if (isIcon) {
+  console.log({ icons: icons[name], name });
+  const icon = useMemo(() => {
+    const isIconFromProvider = name in icons && !name.includes("_local");
+
+    if (isIconFromProvider) {
       const icon = icons[name as keyof typeof icons];
       return React.cloneElement(icon as React.ReactElement, {
         className,
@@ -79,23 +82,23 @@ const Icon = ({ name, className, size, onClick }: Props) => {
       });
     }
 
-    if (!isIcon && name?.length > 0) {
+    if (!isIconFromProvider) {
       return (
         <NextImg
           onClick={onClick}
-          src={name}
+          src={icons[name]}
           alt={name}
           className={className}
           style={{ width: size, height: size }}
-          width={16}
-          height={16}
+          width={size}
+          height={size}
         />
       );
     }
     return <></>;
-  }, [name, className, size]);
+  }, [name, className, size, onClick]);
 
-  return <>{getIcon}</>;
+  return <>{icon}</>;
 };
 
 export default Icon;

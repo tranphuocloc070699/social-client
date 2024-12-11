@@ -3,12 +3,9 @@
 import React, { useState } from "react";
 import Icon from "@/components/common/icon";
 import { twMerge } from "tailwind-merge";
-import HeaderUser from "@/components/common/header/header-user";
-import HeaderMenuItem from "@/components/common/header/header-menu-item";
-import { HeaderItem } from "@/components/common/header/header-menu";
 import Typography from "@/components/common/typography";
 import InputForm from "@/components/common/input/InputForm";
-import Button from "@/components/common/button";
+import { Button } from "@/components/ui/button";
 import SearchHistoryItem from "@/components/common/header/search-history-item";
 
 type Props = {
@@ -129,11 +126,7 @@ const HeaderSearch = ({ className }: Props) => {
                 wrapperClassName={"h-10"}
                 label={{ showLabel: false }}
               />
-              <Button
-                className={"flex-1 gap-0 p-4"}
-                icon={{ showIcon: true, name: "search" }}
-                showChildren={false}
-              ></Button>
+              <Button className={"flex-1 gap-0 p-4"} icon={"search"}></Button>
             </div>
             <div className={"mt-6"}>
               <Typography.Label
