@@ -15,7 +15,7 @@ import logo from "@/public/assets/images/Logo.svg";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import UserService from "@/services/modules/user.service";
+import UserModule from "@/services/modules/user.module";
 import Link from "next/link";
 import SignupSuccessModal from "./modal/signup-success";
 import { useRouter } from "next/navigation";
@@ -87,7 +87,7 @@ const AuthContainer = ({ type }: Props) => {
   });
 
   async function onSubmit(data: IAuthForm) {
-    const userService = new UserService();
+    const userService = new UserModule();
     console.log("trigger...");
 
     let response;

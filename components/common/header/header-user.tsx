@@ -56,7 +56,7 @@ const HeaderUser = ({ className }: Props) => {
         <section className={"flex items-center gap-6"}>
           <HeaderSearch className={"hidden md:block"} />
           <Link href={path.current.auth}>
-            <Icon name={"plus"} size={32} className={"text-sh-primary"} />
+            <Icon name={"user"} size={32} className={"text-sh-primary"} />
           </Link>
         </section>
       )}
