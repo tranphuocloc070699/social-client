@@ -8,6 +8,7 @@ import Link from "next/link";
 import Typography from "@/components/common/typography";
 import HeaderSearch from "@/components/common/header/header-search";
 import { useUserStore } from "@/store/user.store";
+import { Button } from "@/components/ui/button";
 
 type Props = {
   className?: string;
@@ -18,15 +19,13 @@ const HeaderUser = ({ className }: Props) => {
     auth: "/dang-nhap",
   });
 
-  console.log({ user });
-
   return (
     <div className={twMerge(`flex items-center gap-6 ${className}`)}>
       {isAuthenticated ? (
         <section
           className={"flex w-full items-center justify-between md:justify-end"}
         >
-          <div className={"flex items-center gap-2"}>
+          <div className={"relative flex items-center gap-2"}>
             <div className={"relative"}>
               <Avatar className={"relative border border-sh-text"}>
                 <AvatarImage src="https://github.com/shadcn.png" />
@@ -43,6 +42,18 @@ const HeaderUser = ({ className }: Props) => {
             <Typography.Label className={"text-white"}>
               {user?.full_name}
             </Typography.Label>
+
+            <div
+              className={
+                "absolute left-0 top-[120%] z-50 w-full rounded-lg bg-sh-secondary-300 shadow-xl"
+              }
+            >
+              <Button
+                className={"bg-sh-secondary-300 text-red-500 hover:bg-white"}
+              >
+                Đăng xuất
+              </Button>
+            </div>
           </div>
           <Link
             href={"/"}
