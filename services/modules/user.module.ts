@@ -2,7 +2,7 @@ import type { ResponseDto } from "@/types/response";
 import HttpFactory from "../factory";
 import { IAuthForm, ISignUpLoginResponse } from "@/types/user/user.interface";
 
-class UserService extends HttpFactory {
+class UserModule extends HttpFactory {
   prefix: string = "/api/v1";
 
   async signup(requestData: IAuthForm) {
@@ -36,4 +36,4 @@ class UserService extends HttpFactory {
   }
 }
 
-export default UserService;
+export default UserModule;

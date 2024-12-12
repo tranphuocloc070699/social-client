@@ -11,7 +11,16 @@ export default function HomePage() {
     <div className={"space-y-10"}>
       <Banner></Banner>
       <BlockTitle
-        title={"switch"}
+        title={"Switch"}
+        icon={{ showIcon: true, name: "keyboard" }}
+        showAllPath={"/"}
+        className={"px-4 md:px-6"}
+      >
+        <SwitchList />
+      </BlockTitle>
+
+      <BlockTitle
+        title={"Keycap"}
         icon={{ showIcon: true, name: "keyboard" }}
         showAllPath={"/"}
         className={"px-4 md:px-6"}
