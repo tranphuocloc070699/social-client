@@ -28,9 +28,7 @@ const AuthContainer = ({ type }: Props) => {
   const router = useRouter();
   const { toast } = useToast();
   const userStore = useUserStore();
-  useEffect(() => {
-    console.log({ user: userStore.user });
-  }, [userStore.user]);
+
   const data = {
     login: {
       title: "Đăng nhập",
@@ -88,7 +86,6 @@ const AuthContainer = ({ type }: Props) => {
 
   async function onSubmit(data: IAuthForm) {
     const userService = new UserModule();
-    console.log("trigger...");
 
     let response;
     if (type === "signup") {
@@ -136,7 +133,7 @@ const AuthContainer = ({ type }: Props) => {
         reset();
       } else {
         userStore.setUser(response?.data?.data);
-        console.log({ data: response?.data?.data });
+
         router.push("/");
       }
     } else {

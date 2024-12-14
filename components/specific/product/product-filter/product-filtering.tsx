@@ -21,13 +21,10 @@ const ProductFiltering = () => {
     useProductFilterStore();
 
   function handleSearchInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-    console.log({ e });
     setInputValue(e.target.value);
   }
 
-  function handleDebounce(e: React.ChangeEvent<HTMLInputElement>) {
-    console.log({ value: e.target.value });
-  }
+  function handleDebounce(e: React.ChangeEvent<HTMLInputElement>) {}
 
   return (
     <div

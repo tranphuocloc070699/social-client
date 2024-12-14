@@ -5,11 +5,15 @@ import BlockTitle from "@/components/common/block-title";
 import SwitchList from "@/components/specific/switch/switch-list";
 import Banner from "@/components/common/banner";
 import PostList from "@/components/specific/post/post-list";
+import KeycapModule from "@/services/modules/keycap.module";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const keycapModule = new KeycapModule();
+  const { data } = await keycapModule.getAll();
+  console.log({ data });
   return (
     <div className={"space-y-10"}>
-      <Banner></Banner>
+      <Banner />
       <BlockTitle
         title={"Switch"}
         icon={{ showIcon: true, name: "keyboard" }}

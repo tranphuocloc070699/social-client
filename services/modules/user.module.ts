@@ -1,14 +1,15 @@
 import type { ResponseDto } from "@/types/response";
 import HttpFactory from "../factory";
 import { IAuthForm, ISignUpLoginResponse } from "@/types/user/user.interface";
+import { getClientOrServerUrl } from "@/lib/utils";
 
 class UserModule extends HttpFactory {
-  prefix: string = "/api/v1";
+  prefix: string = "";
 
   async signup(requestData: IAuthForm) {
     return this.call<ResponseDto<ISignUpLoginResponse>>({
       method: "POST",
-      url: `${this.prefix}/create-user`,
+      url: `${getClientOrServerUrl()}${this.prefix}/create-user`,
       body: requestData,
     });
   }
@@ -16,22 +17,8 @@ class UserModule extends HttpFactory {
   async login(requestData: IAuthForm) {
     return this.call<ResponseDto<ISignUpLoginResponse>>({
       method: "POST",
-      url: `${this.prefix}/login`,
+      url: `${getClientOrServerUrl()}${this.prefix}/login`,
       body: requestData,
-    });
-  }
-
-  async authenticate() {
-    return this.call<ResponseDto<ISignUpLoginResponse>>({
-      method: "GET",
-      url: `/api/user`,
-    });
-  }
-
-  async logout() {
-    return this.call<ResponseDto<ISignUpLoginResponse>>({
-      method: "PUT",
-      url: `/api/user/log-out`,
     });
   }
 }

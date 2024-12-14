@@ -39,7 +39,6 @@ const ProductGallery = ({ className }: Props) => {
   const orientation = useMemo(() => {
     return isMobile ? "horizontal" : "vertical";
   }, [isMobile]);
-  console.log({ orientation });
 
   function handleImageClick(index: number) {
     if (api) {

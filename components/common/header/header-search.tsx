@@ -21,19 +21,16 @@ const HeaderSearch = ({ className }: Props) => {
   }
 
   function closeSearch() {
-    console.log("trigger...");
     setIsOpenSearch(false);
   }
 
   function onSearchChange() {}
 
   function onSearchFocus() {
-    console.log("search focus");
     setIsInputFocus(true);
   }
 
   function onSearchBlur() {
-    console.log("search blur");
     setIsInputFocus(false);
   }
 
@@ -119,9 +116,7 @@ const HeaderSearch = ({ className }: Props) => {
                   name: "search-input",
                   value: "",
 
-                  onChange: () => {
-                    console.log("hello");
-                  },
+                  onChange: () => {},
                 }}
                 wrapperClassName={"h-10"}
                 label={{ showLabel: false }}

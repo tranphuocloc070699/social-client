@@ -69,7 +69,6 @@ interface Props {
 }
 
 const Icon = ({ name, className, size, onClick }: Props) => {
-  console.log({ icons: icons[name], name });
   const icon = useMemo(() => {
     const isIconFromProvider = name in icons && !name.includes("_local");
 

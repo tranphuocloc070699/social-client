@@ -7,6 +7,7 @@ interface UserStore {
   user: UserDto;
   isAuthenticated: boolean;
   setUser: (user: UserDto) => void;
+  logout: () => void;
 }
 
 export const useUserStore = create<UserStore>()(
@@ -18,6 +19,11 @@ export const useUserStore = create<UserStore>()(
         set(() => ({
           user,
           isAuthenticated: true,
+        })),
+      logout: () =>
+        set(() => ({
+          user: dummyUser,
+          isAuthenticated: false,
         })),
     }),
     {
